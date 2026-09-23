@@ -1,9 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from rotas import clientes, senioridade, tatuadores   # ← adiciona tatuadores aqui
+# Importa todos os módulos de rotas juntos em uma única linha:
+from rotas import clientes, senioridade, tatuadores, agendamentos
 
+# 1. Primeiro cria a aplicação FastAPI:
 app = FastAPI()
 
+# 2. Configura o middleware de CORS:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -11,9 +14,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# 3. Registra todas as rotas depois que o 'app' já existe:
 app.include_router(clientes.router)
 app.include_router(senioridade.router)
-app.include_router(tatuadores.router)   # ← registra a nova rota
+app.include_router(tatuadores.router)
+app.include_router(agendamentos.router)
 
 
 @app.get("/")
