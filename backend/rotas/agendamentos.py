@@ -5,10 +5,11 @@
 #            tatuador (duas chaves estrangeiras).
 # ============================================================
 
-from fastapi import APIRouter
+from fastapi import APIRouter, UploadFile, File
 from pydantic import BaseModel
 from typing import Optional
 from database import conectar
+import os
 
 router = APIRouter()
 
@@ -22,7 +23,8 @@ class Agendamento(BaseModel):
     valortatuagem: Optional[float] = None   # opcional
     status: Optional[str] = None            # só é usado ao atualizar (ver Parte 7)
 
-    # POST /agendamentos — cadastra um novo agendamento
+
+# POST /agendamentos — cadastra um novo agendamento
 @router.post("/agendamentos")
 def criar_agendamento(agendamento: Agendamento):
     conn = conectar()
@@ -33,13 +35,13 @@ def criar_agendamento(agendamento: Agendamento):
         (agendamento.idcliente, agendamento.idtatuador, agendamento.dataagendamento,
          agendamento.horaagendamento, agendamento.descricaotatuagem, agendamento.valortatuagem)
     )
-    # repare que a coluna status nem aparece aqui — o banco aplica sozinho
-    # o DEFAULT 'pendente' que já foi definido lá na Aula 2
+    novo_id = cursor.lastrowid   # o ID que o MySQL gerou sozinho pro novo agendamento (AUTO_INCREMENT)
     conn.commit()
     conn.close()
-    return {"mensagem": "Agendamento cadastrado com sucesso"}
+    return {"mensagem": "Agendamento cadastrado com sucesso", "idagendamento": novo_id}
 
-    # GET /agendamentos — lista todos os agendamentos, já com nome do cliente e do tatuador
+
+# GET /agendamentos — lista todos os agendamentos, já com nome do cliente e do tatuador
 @router.get("/agendamentos")
 def listar_agendamentos():
     conn = conectar()
@@ -63,6 +65,7 @@ def listar_agendamentos():
 
     return agendamentos
 
+
 # GET /agendamentos/{id} — busca um agendamento pelo ID
 @router.get("/agendamentos/{id}")
 def buscar_agendamento(id: int):
@@ -82,7 +85,8 @@ def buscar_agendamento(id: int):
 
     return agendamento
 
-    # PUT /agendamentos/{id} — atualiza um agendamento existente
+
+# PUT /agendamentos/{id} — atualiza um agendamento existente
 @router.put("/agendamentos/{id}")
 def atualizar_agendamento(id: int, agendamento: Agendamento):
     conn = conectar()
@@ -99,3 +103,32 @@ def atualizar_agendamento(id: int, agendamento: Agendamento):
     conn.commit()
     conn.close()
     return {"mensagem": "Agendamento atualizado com sucesso"}
+
+
+# DELETE /agendamentos/{id} — deleta um agendamento
+@router.delete("/agendamentos/{id}")
+def deletar_agendamento(id: int):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM agendamento WHERE idagendamento = %s", (id,))
+    conn.commit()
+    conn.close()
+    return {"mensagem": "Agendamento deletado com sucesso"}
+
+
+# POST /agendamentos/{id}/desenho — recebe a imagem do desenho aprovado e associa ao agendamento
+@router.post("/agendamentos/{id}/desenho")
+async def upload_desenho(id: int, arquivo: UploadFile = File(...)):
+    nome_arquivo = f"{id}_{arquivo.filename}"   # o id na frente evita nomes repetidos entre agendamentos
+    caminho = os.path.join("uploads", nome_arquivo)
+
+    conteudo = await arquivo.read()       # lê o conteúdo do arquivo enviado
+    with open(caminho, "wb") as f:        # "wb" = write binary — é uma imagem, não texto
+        f.write(conteudo)
+
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE agendamento SET desenhoaprovado=%s WHERE idagendamento=%s", (nome_arquivo, id))
+    conn.commit()
+    conn.close()
+    return {"mensagem": "Desenho enviado com sucesso", "arquivo": nome_arquivo}
