@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01/10/2026 às 04:18
+-- Tempo de geração: 07/10/2026 às 22:46
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -141,7 +141,9 @@ CREATE TABLE `tatuador` (
 INSERT INTO `tatuador` (`idtatuador`, `nometatuador`, `cpf`, `email`, `telefone`, `datacontratacao`, `idsenioridade`) VALUES
 (1, 'Lucas Mendes', '11111111111', 'lucas@estudio.com', '11999990001', '2020-03-01', 3),
 (2, 'Carla Souza', '22222222222', 'carla@estudio.com', '11999990002', '2022-06-15', 2),
-(3, 'Pedro Lima', '33333333333', 'pedro@estudio.com', '11999990003', '2024-01-10', 1);
+(3, 'Pedro Lima', '33333333333', 'pedro@estudio.com', '11999990003', '2024-01-10', 1),
+(4, 'Jorge', '22266639633', 'jorgetatto@gmail.com', '11945853699', '2023-06-20', 2),
+(6, 'Cassandra', '12345678900', 'cassstudiio@email.com', '11999999999', '2026-10-07', 2);
 
 -- --------------------------------------------------------
 
@@ -160,10 +162,12 @@ CREATE TABLE `tatuador_estilo` (
 --
 
 INSERT INTO `tatuador_estilo` (`idtatuador`, `idestilo`, `dataestilo`) VALUES
-(1, 1, '2020-03-01'),
-(1, 3, '2021-05-10'),
+(1, 1, '2026-10-07'),
+(1, 3, '2026-10-07'),
 (2, 2, '2022-06-15'),
-(3, 4, '2024-01-10');
+(3, 4, '2024-01-10'),
+(6, 1, '2026-10-07'),
+(6, 2, '2026-10-07');
 
 --
 -- Índices para tabelas despejadas
@@ -243,7 +247,7 @@ ALTER TABLE `senioridade`
 -- AUTO_INCREMENT de tabela `tatuador`
 --
 ALTER TABLE `tatuador`
-  MODIFY `idtatuador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idtatuador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restrições para tabelas despejadas
