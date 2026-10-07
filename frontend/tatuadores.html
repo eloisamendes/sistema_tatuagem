@@ -7,19 +7,18 @@
 </head>
 <body class="container py-4">
 
-<nav class="navbar navbar-dark bg-dark mb-4">
-  <div class="container">
-    <span class="navbar-brand">Estúdio de Tatuagem</span>
-    <div>
-      <a href="clientes.html" class="text-light me-3">Clientes</a>
-      <a href="senioridade.html" class="text-light me-3">Senioridade</a>
-      <a href="tatuadores.html" class="text-light me-3">Tatuadores</a>
-      <a href="agendamentos.html" class="text-light">Agendamentos</a>
+  <nav class="navbar navbar-dark bg-dark mb-4">
+    <div class="container">
+      <span class="navbar-brand">Estúdio de Tatuagem</span>
+      <div>
+        <a href="clientes.html" class="text-light me-3">Clientes</a>
+        <a href="senioridade.html" class="text-light me-3">Senioridade</a>
+        <a href="estilos.html" class="text-light me-3">Estilos</a>
+        <a href="tatuadores.html" class="text-light me-3">Tatuadores</a>
+        <a href="agendamentos.html" class="text-light">Agendamentos</a>
+      </div>
     </div>
-  </div>
-</nav>
-
-
+  </nav>
 
   <h1>Tatuadores</h1>
 
@@ -43,7 +42,16 @@
         <!-- as opções são preenchidas pelo JavaScript -->
       </select>
     </div>
-    <div class="col-md-2">
+
+    <!-- Bloco de Checkboxes para selecionar os Estilos -->
+    <div class="col-md-12 mt-3">
+      <label class="form-label">Estilos que domina</label>
+      <div id="lista-estilos" class="d-flex flex-wrap gap-3">
+        <!-- os checkboxes são preenchidos pelo JavaScript -->
+      </div>
+    </div>
+
+    <div class="col-md-2 mt-3">
       <button id="btn-submit-tatuador" type="submit" class="btn btn-primary w-100">Cadastrar</button>
     </div>
   </form>
@@ -58,6 +66,7 @@
         <th>E-mail</th>
         <th>Telefone</th>
         <th>Senioridade</th>
+        <th>Estilos</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -67,8 +76,6 @@
   </table>
 
   <script src="js/tatuadores.js"></script>
-
-
 
 </body>
 </html>
