@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09/10/2026 às 22:47
+-- Tempo de geração: 12/10/2026 às 06:02
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -192,7 +192,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idusuario`, `nome`, `email`, `senha`, `tipo`, `idcliente`) VALUES
 (1, 'addie', 'addielarue@gmail.com', '$2b$12$btrktkxBD.GCBIBxs0lUEent7kU9ql8ElVXnzRA8vZdzcjLddc4Eq', 'funcionario', NULL),
-(3, 'Anna Loise', 'loiseanna@gmail.com', '$2b$12$6EvCNwq.dY8TVOMdj62xMuALi0p.88iEd45J8woIQJ/0dMbIWIxuO', 'funcionario', NULL);
+(3, 'Anna Loise', 'loiseanna@gmail.com', '$2b$12$6EvCNwq.dY8TVOMdj62xMuALi0p.88iEd45J8woIQJ/0dMbIWIxuO', 'funcionario', NULL),
+(4, 'monica', 'monicag@gmail.com', '$2b$12$.NCDH7ZTMamHVqD8L50/yet3iOzERMhN0H94ubuzYyHgh.pdrUDIW', 'funcionario', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -286,7 +287,7 @@ ALTER TABLE `tatuador`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para tabelas despejadas
