@@ -4,10 +4,11 @@
 #            guardando a senha como hash (nunca em texto puro).
 # ============================================================
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from database import conectar
 import bcrypt      # biblioteca que gera e confere o hash da senha
+from seguranca import verificar_admin  # importa a segurança de admin
 
 router = APIRouter()
 
@@ -17,9 +18,9 @@ class Usuario(BaseModel):
     email: str    # obrigatório
     senha: str    # obrigatório — chega aqui em texto puro, só nessa etapa
 
-# POST /usuarios — cadastra um novo usuário
+# POST /usuarios — cadastra um novo usuário (protegido: apenas administradores)
 @router.post("")
-def criar_usuario(usuario: Usuario):
+def criar_usuario(usuario: Usuario, admin: dict = Depends(verificar_admin)):
     # gera o hash da senha — gensalt() cria um "tempero" aleatório (salt) diferente
     # a cada vez, então duas pessoas com a mesma senha geram hashes diferentes
     senha_hash = bcrypt.hashpw(usuario.senha.encode("utf-8"), bcrypt.gensalt())
