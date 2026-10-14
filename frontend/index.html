@@ -3,11 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Estúdio de Tatuagem</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♱</text></svg>">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .btn-primary { background-color: #661c1c !important; border-color: #661c1c !important; }
+    .btn-primary:hover { background-color: #521616 !important; border-color: #521616 !important; }
+    .navbar { background-color: #661c1c !important; }
+    .conteudo-centralizado {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .conteudo-centralizado h1 {
+      font-size: 3rem;
+      font-weight: 600;
+    }
+    .conteudo-centralizado p {
+      font-size: 1.25rem;
+    }
+  </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-dark bg-dark">
+  <nav class="navbar navbar-dark">
     <div class="container">
       <span class="navbar-brand">Estúdio de Tatuagem</span>
       <div>
@@ -17,11 +38,13 @@
   </nav>
 
   <div class="container py-5 text-center">
-    <h1 class="display-4">Seu estúdio, organizado do seu jeito</h1>
-    <p class="lead">
-      Nosso estúdio é dedicado à criação de tatuagens autorais e exclusivas. Trabalhamos com os mais altos padrões de biossegurança, biossegregação e atendimento personalizado, oferecendo um ambiente acolhedor para transformar sua ideia em arte. Entre em contato para consultar a disponibilidade da nossa equipe.
-    </p>
-    <a href="cadastro.html" class="btn btn-primary btn-lg mt-3">Comece agora</a>
+    <div class="conteudo-centralizado">
+      <h1 class="display-4 mb-4">Seu estúdio, organizado do seu jeito</h1>
+      <p class="lead mb-4">
+        Nosso estúdio é dedicado à criação de tatuagens autorais e exclusivas. Trabalhamos com os mais altos padrões de biossegurança, biossegregação e atendimento personalizado, oferecendo um ambiente acolhedor para transformar sua ideia em arte. Entre em contato para consultar a disponibilidade da nossa equipe.
+      </p>
+      <a href="cadastro.html" class="btn btn-primary btn-lg mt-3 px-5 py-3 fs-5">Comece agora</a>
+    </div>
   </div>
 
 </body>
