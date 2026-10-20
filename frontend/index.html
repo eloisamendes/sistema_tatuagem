@@ -8,21 +8,40 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f2f3;
+      color: #333333;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     .btn-primary { background-color: #661c1c !important; border-color: #661c1c !important; }
     .btn-primary:hover { background-color: #521616 !important; border-color: #521616 !important; }
     .navbar { background-color: #661c1c !important; }
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
     .conteudo-centralizado {
       max-width: 800px;
       margin: 0 auto;
       text-align: center;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(102, 28, 28, 0.08);
     }
     .conteudo-centralizado h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 600;
+      color: #661c1c;
     }
     .conteudo-centralizado p {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
+      color: #555555;
     }
   </style>
 </head>
@@ -37,13 +56,15 @@
     </div>
   </nav>
 
-  <div class="container py-5 text-center">
-    <div class="conteudo-centralizado">
-      <h1 class="display-4 mb-4">Seu estúdio, organizado do seu jeito</h1>
-      <p class="lead mb-4">
-        Nosso estúdio é dedicado à criação de tatuagens autorais e exclusivas. Trabalhamos com os mais altos padrões de biossegurança, biossegregação e atendimento personalizado, oferecendo um ambiente acolhedor para transformar sua ideia em arte. Entre em contato para consultar a disponibilidade da nossa equipe.
-      </p>
-      <a href="cadastro.html" class="btn btn-primary btn-lg mt-3 px-5 py-3 fs-5">Comece agora</a>
+  <div class="main-wrapper">
+    <div class="container text-center">
+      <div class="conteudo-centralizado">
+        <h1 class="display-4 mb-4">Seu estúdio, organizado do seu jeito!</h1>
+        <p class="lead mb-4">
+          Gerencie os agendamentos da sua equipe, organize o cadastro de clientes e acompanhe a rotina do seu estúdio de forma simples, rápida e centralizada. Tudo o que você precisa para manter o controle da sua agenda e focar no que realmente importa.
+        </p>
+        <a href="cadastro.html" class="btn btn-primary btn-lg mt-3 px-5 py-3 fs-5">Comece agora</a>
+      </div>
     </div>
   </div>
 

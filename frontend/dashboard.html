@@ -8,47 +8,79 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f2f3;
     }
-    .navbar { background-color: #661c1c !important; }
     
-    /* Cores personalizadas para cada grupo de botões */
+    .navbar { 
+      background-color: #661c1c !important; 
+      padding: 1rem 0; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    }
+
+    .navbar-brand {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Cores personalizadas para cada grupo de botões com melhorias visuais */
     .btn-principal {
       background-color: #661c1c !important;
       border-color: #661c1c !important;
       color: #ffffff !important;
+      box-shadow: 0 4px 15px rgba(102, 28, 28, 0.15);
+      transition: all 0.2s ease;
+      border-radius: 12px;
     }
     .btn-principal:hover {
       background-color: #521616 !important;
       border-color: #521616 !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 28, 28, 0.25);
     }
 
     .btn-config {
       background-color: #3f3f46 !important;
       border-color: #3f3f46 !important;
       color: #ffffff !important;
+      box-shadow: 0 4px 15px rgba(63, 63, 70, 0.15);
+      transition: all 0.2s ease;
+      border-radius: 12px;
     }
     .btn-config:hover {
       background-color: #27272a !important;
       border-color: #27272a !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(63, 63, 70, 0.25);
     }
 
     .btn-funcionario {
       background-color: #18181b !important;
       border-color: #18181b !important;
       color: #ffffff !important;
+      box-shadow: 0 4px 15px rgba(24, 24, 27, 0.15);
+      transition: all 0.2s ease;
+      border-radius: 12px;
     }
     .btn-funcionario:hover {
       background-color: #09090b !important;
       border-color: #09090b !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(24, 24, 27, 0.25);
+    }
+
+    h1 {
+      color: #2c3e50;
+      letter-spacing: -0.5px;
     }
   </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-dark mb-4">
+  <nav class="navbar navbar-dark mb-4 px-3 rounded">
     <div class="container">
       <span class="navbar-brand">Estúdio de Tatuagem</span>
-      <button onclick="sair()" class="btn btn-outline-light btn-sm">Sair</button>
+      <button onclick="sair()" class="btn btn-outline-light btn-sm px-3">Sair</button>
     </div>
   </nav>
 

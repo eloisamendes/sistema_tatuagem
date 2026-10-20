@@ -1,20 +1,12 @@
-# ============================================================
-# rotas/estilos.py — CRUD de Estilos
-# Descrição: Endpoints para gerenciar os estilos de tatuagem
-#            (Blackwork, Aquarela, Realismo, Old School...).
-# ============================================================
-
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from database import conectar
 
 router = APIRouter()
 
-# Modelo de dados — define os campos que o estilo deve ter
 class Estilo(BaseModel):
-    descricao: str    # obrigatório — ex: "Blackwork", "Aquarela"
+    descricao: str  
 
-# GET /estilos — lista todos os estilos
 @router.get("")
 def listar_estilos():
     conn = conectar()
@@ -24,7 +16,6 @@ def listar_estilos():
     conn.close()
     return estilos
 
-# GET /estilos/{id} — busca um estilo pelo ID
 @router.get("/{id}")
 def buscar_estilo(id: int):
     conn = conectar()
@@ -33,30 +24,40 @@ def buscar_estilo(id: int):
     estilo = cursor.fetchone()
     conn.close()
     if not estilo:
-        return {"erro": "Estilo não encontrado"}
+        raise HTTPException(status_code=404, detail="Estilo não encontrado")
     return estilo
 
-# POST /estilos — cadastra um novo estilo
 @router.post("")
 def criar_estilo(estilo: Estilo):
     conn = conectar()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO estilo (descricao) VALUES (%s)", (estilo.descricao,))
+    cursor = conn.cursor(dictionary=True)
+    
+    # 1. Padroniza o texto (remove espaços extras)
+    descricao_limpa = estilo.descricao.strip()
+    
+    # 2. Verifica se já existe um estilo com essa mesma descrição (ignorando maiúsculas/minúsculas)
+    cursor.execute("SELECT * FROM estilo WHERE LOWER(descricao) = LOWER(%s)", (descricao_limpa,))
+    existente = cursor.fetchone()
+    
+    if existente:
+        conn.close()
+        raise HTTPException(status_code=400, detail="Este estilo já está cadastrado!")
+    
+    # 3. Se não existir, insere
+    cursor.execute("INSERT INTO estilo (descricao) VALUES (%s)", (descricao_limpa,))
     conn.commit()
     conn.close()
     return {"mensagem": "Estilo cadastrado com sucesso"}
 
-# PUT /estilos/{id} — atualiza um estilo existente
 @router.put("/{id}")
 def atualizar_estilo(id: int, estilo: Estilo):
     conn = conectar()
     cursor = conn.cursor()
-    cursor.execute("UPDATE estilo SET descricao=%s WHERE idestilo=%s", (estilo.descricao, id))
+    cursor.execute("UPDATE estilo SET descricao=%s WHERE idestilo=%s", (estilo.descricao.strip(), id))
     conn.commit()
     conn.close()
     return {"mensagem": "Estilo atualizado com sucesso"}
 
-# DELETE /estilos/{id} — deleta um estilo
 @router.delete("/{id}")
 def deletar_estilo(id: int):
     conn = conectar()
@@ -69,4 +70,4 @@ def deletar_estilo(id: int):
     except Exception as erro:
         conn.rollback()
         conn.close()
-        return {"erro": "Não foi possível excluir este estilo. Verifique se algum tatuador já foi marcado com ele."}
+        raise HTTPException(status_code=400, detail="Não foi possível excluir este estilo. Verifique se algum tatuador já foi marcado com ele.")
