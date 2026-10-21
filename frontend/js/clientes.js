@@ -1,5 +1,5 @@
 const API = 'http://127.0.0.1:8000'
-protegerPagina() // bloqueia a página se não tiver login
+
 
 const formCliente = document.getElementById('form-cliente')
 const botaoSubmit = document.getElementById('btn-submit-cliente')
